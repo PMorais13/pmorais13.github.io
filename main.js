@@ -531,7 +531,7 @@ class ContactComponent {
     }
 }
 ContactComponent.ɵfac = function ContactComponent_Factory(t) { return new (t || ContactComponent)(); };
-ContactComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ContactComponent, selectors: [["app-contact"]], decls: 5, vars: 0, consts: [["type", "button", "href", "https://wa.me/051984591854", "target", "_blank", 1, "btn", "btn-outline-dark"], ["type", "button", "href", "phmscout@gmail.com", "target", "_blank", 1, "btn", "btn-outline-dark"]], template: function ContactComponent_Template(rf, ctx) { if (rf & 1) {
+ContactComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ContactComponent, selectors: [["app-contact"]], decls: 5, vars: 0, consts: [["type", "button", "href", "https://wa.me/051984591854", "target", "_blank", 1, "btn", "btn-outline-dark"], ["type", "button", "href", "mailto:phmscout@gmail.com", 1, "btn", "btn-outline-dark"]], template: function ContactComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "address");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "a", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "Fale comigo pelo Whatsapp!");
