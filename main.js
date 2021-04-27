@@ -1,5 +1,35 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["main"],{
 
+/***/ "/Ond":
+/*!**************************************************************!*\
+  !*** ./src/app/features/components/error/error.component.ts ***!
+  \**************************************************************/
+/*! exports provided: ErrorComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ErrorComponent", function() { return ErrorComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
+class ErrorComponent {
+    constructor() { }
+    ngOnInit() {
+    }
+}
+ErrorComponent.ɵfac = function ErrorComponent_Factory(t) { return new (t || ErrorComponent)(); };
+ErrorComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ErrorComponent, selectors: [["app-error"]], decls: 4, vars: 0, consts: [[1, "my-5", "d-flex", "justify-content-center"], ["src", "./../../../../assets/img/dog-confuso.png", "alt", "dog confuso"]], template: function ErrorComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "h1");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "Erro 404");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "img", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJlcnJvci5jb21wb25lbnQuc2NzcyJ9 */"] });
+
+
+/***/ }),
+
 /***/ "/uTe":
 /*!**********************************************************************!*\
   !*** ./src/app/features/components/formation/formation.component.ts ***!
@@ -139,7 +169,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_formation_formation_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/formation/formation.component */ "/uTe");
 /* harmony import */ var _components_experience_experience_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/experience/experience.component */ "YDOH");
 /* harmony import */ var _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/contact/contact.component */ "cWEi");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _components_error_error_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/error/error.component */ "/Ond");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
 
 
 
@@ -154,6 +186,10 @@ const routes = [
         path: '',
         component: _features_component__WEBPACK_IMPORTED_MODULE_1__["FeaturesComponent"],
         children: [
+            {
+                path: '**',
+                component: _components_error_error_component__WEBPACK_IMPORTED_MODULE_7__["ErrorComponent"]
+            },
             {
                 path: '',
                 component: _components_card_profile_card_profile_component__WEBPACK_IMPORTED_MODULE_2__["CardProfileComponent"]
@@ -184,9 +220,9 @@ const routes = [
 class FeaturesRoutingModule {
 }
 FeaturesRoutingModule.ɵfac = function FeaturesRoutingModule_Factory(t) { return new (t || FeaturesRoutingModule)(); };
-FeaturesRoutingModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineNgModule"]({ type: FeaturesRoutingModule });
-FeaturesRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineInjector"]({ imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forChild(routes)], _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵsetNgModuleScope"](FeaturesRoutingModule, { imports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]], exports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] }); })();
+FeaturesRoutingModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdefineNgModule"]({ type: FeaturesRoutingModule });
+FeaturesRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdefineInjector"]({ imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forChild(routes)], _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵsetNgModuleScope"](FeaturesRoutingModule, { imports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]], exports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] }); })();
 
 
 /***/ }),
