@@ -1466,5 +1466,10 @@ html, body {
 body {
   background-color: #d4d3d3;
 }
+.box {
+  padding: 5px;
+  background-color: rgba(247, 222, 213, 0.486);
+  border-radius: 20px;
+}
 
 /*# sourceMappingURL=styles.css.map*/
