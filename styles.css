@@ -1470,6 +1470,8 @@ body {
   padding: 5px;
   background-color: rgba(247, 222, 213, 0.486);
   border-radius: 20px;
+  border-style: outset;
+  border-color: #f1a8a8;
 }
 
 /*# sourceMappingURL=styles.css.map*/
