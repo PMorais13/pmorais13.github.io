@@ -1,0 +1,27 @@
+[
+  {
+    "id": 3,
+    "name": "Financeiro",
+    "icon": "account_balance"
+  },
+  {
+    "id": 4,
+    "name": "Comercial",
+    "icon": "store"
+  },
+  {
+    "id": 5,
+    "name": "Jurídico",
+    "icon": "gavel"
+  },
+  {
+    "name": "Vendedores",
+    "id": 6,
+    "icon": "list_alt"
+  },
+  {
+    "name": "Memories",
+    "icon": "memory",
+    "id": 7
+  }
+]

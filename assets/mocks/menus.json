@@ -1,0 +1,54 @@
+{
+  "admin": [
+    {
+      "id": 31,
+      "label": "menu.employeeList",
+      "icon": "group",
+      "route": "funcionarios"
+    },
+    {
+      "id": 30,
+      "label": "menu.addEmployee",
+      "icon": "person_add",
+      "route": "add-funcionario"
+    },
+    {
+      "id": 20,
+      "label": "menu.dashboard",
+      "icon": "dashboard",
+      "route": "dashboard"
+    },
+    {
+      "id": 32,
+      "label": "menu.admin",
+      "icon": "settings",
+      "route": "admin"
+    }
+  ],
+  "common": [
+    {
+      "id": 10,
+      "label": "menu.home",
+      "icon": "home",
+      "route": ""
+    },
+    {
+      "id": 15,
+      "label": "menu.profile",
+      "icon": "person",
+      "route": "profile"
+    },
+    {
+      "id": 41,
+      "label": "menu.checkIn",
+      "icon": "access_time",
+      "route": "ponto"
+    },
+    {
+      "id": 51,
+      "label": "menu.records",
+      "icon": "receipt_long",
+      "route": "records"
+    }
+  ]
+}

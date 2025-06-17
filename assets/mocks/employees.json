@@ -1,0 +1,215 @@
+[
+  {
+    "id": "1",
+    "nome": "João da Silva",
+    "matricula": "10234",
+    "cpf": "123.456.789-00",
+    "sector": "Recursos Humanos",
+    "data": "1993-03-13",
+    "personal": {
+      "nomeCompleto": "João da Silva",
+      "nomeSocial": null,
+      "cpf": "123.456.789-00",
+      "rg": "MG-12.345.678",
+      "orgaoEmissor": "SSP-MG",
+      "dataNascimento": "1993-03-13",
+      "genero": "masculino",
+      "estadoCivil": "solteiro",
+      "nacionalidade": "Brasileiro",
+      "naturalidade": "Belo Horizonte - MG"
+    },
+    "contact": {
+      "telefonePessoal": "(31) 91234-5678",
+      "telefoneResidencial": "(31) 3232-4567",
+      "emailPessoal": "joao@gmail.com",
+      "emailCorporativo": "joao.silva@empresa.com"
+    },
+    "address": {
+      "cep": "30100-000",
+      "rua": "Av. Afonso Pena",
+      "numero": "1000",
+      "complemento": "Apto 101",
+      "bairro": "Centro",
+      "cidade": "Belo Horizonte",
+      "estado": "MG"
+    },
+    "professional": {
+      "cargo": "Analista de RH",
+      "sector": "Recursos Humanos",
+      "matricula": "10234",
+      "dataAdmissao": "2018-05-10",
+      "tipoContrato": "clt",
+      "regimeTrabalho": "presencial",
+      "jornada": "40",
+      "salario": "3500"
+    },
+    "documentation": {
+      "carteiraTrabalho": "1234567 89",
+      "pis": "123.45678.90-1",
+      "tituloEleitor": "123456789012",
+      "reservista": "123456",
+      "cnh": "12345678901",
+      "dependentes": "Joaozinho Silva",
+      "certificados": "Gestão de Pessoas"
+    },
+    "health": {
+      "planoSaude": "Plano Ouro",
+      "numeroCarteirinha": "87654321",
+      "dependentesPlano": "Maria Silva",
+      "alergias": "Nenhuma",
+      "valeTransporte": "Cartão BHBus 123456",
+      "contaBancaria": "Banco 123 AG 1234 CC 123456"
+    },
+    "family": {
+      "conjuge": "Maria",
+      "filhos": "1",
+      "dependentes": "Filho 1"
+    },
+    "access": {
+      "perfilAcesso": "funcionario"
+    },
+    "photo": null
+  },
+  {
+    "id": "2",
+    "nome": "Joana Moreira",
+    "matricula": "20987",
+    "cpf": "987.654.321-00",
+    "sector": "Financeiro",
+    "data": "1995-01-01",
+    "personal": {
+      "nomeCompleto": "Joana Moreira",
+      "nomeSocial": null,
+      "cpf": "987.654.321-00",
+      "rg": "SP-98.765.432",
+      "orgaoEmissor": "SSP-SP",
+      "dataNascimento": "1995-01-01",
+      "genero": "feminino",
+      "estadoCivil": "casado",
+      "nacionalidade": "Brasileira",
+      "naturalidade": "São Paulo - SP"
+    },
+    "contact": {
+      "telefonePessoal": "(11) 98888-7777",
+      "telefoneResidencial": "(11) 4002-1234",
+      "emailPessoal": "joana@gmail.com",
+      "emailCorporativo": "joana.moreira@empresa.com"
+    },
+    "address": {
+      "cep": "01000-000",
+      "rua": "Rua das Flores",
+      "numero": "200",
+      "complemento": null,
+      "bairro": "Centro",
+      "cidade": "São Paulo",
+      "estado": "SP"
+    },
+    "professional": {
+      "cargo": "Analista Financeiro",
+      "sector": "Financeiro",
+      "matricula": "20987",
+      "dataAdmissao": "2019-03-15",
+      "tipoContrato": "clt",
+      "regimeTrabalho": "hibrido",
+      "jornada": "40",
+      "salario": "4200"
+    },
+    "documentation": {
+      "carteiraTrabalho": "9876543 21",
+      "pis": "987.65432.10-1",
+      "tituloEleitor": "987654321098",
+      "reservista": null,
+      "cnh": null,
+      "dependentes": null,
+      "certificados": "Contabilidade Avançada"
+    },
+    "health": {
+      "planoSaude": "Saúde Plus",
+      "numeroCarteirinha": "11223344",
+      "dependentesPlano": null,
+      "alergias": null,
+      "valeTransporte": "Bilhete Único 998877",
+      "contaBancaria": "Banco 456 AG 5678 CC 987654"
+    },
+    "family": {
+      "conjuge": "Carlos",
+      "filhos": "0",
+      "dependentes": null
+    },
+    "access": {
+      "perfilAcesso": "funcionario"
+    },
+    "photo": null
+  },
+  {
+    "id": "3",
+    "nome": "Carlos Souza",
+    "matricula": "EMP003",
+    "cpf": "555.666.777-88",
+    "sector": "Tecnologia",
+    "data": "1990-02-05",
+    "personal": {
+      "nomeCompleto": "Carlos Souza",
+      "nomeSocial": null,
+      "cpf": "555.666.777-88",
+      "rg": "RS-55.666.777",
+      "orgaoEmissor": "SSP-RS",
+      "dataNascimento": "1990-02-05",
+      "genero": "masculino",
+      "estadoCivil": "solteiro",
+      "nacionalidade": "Brasileiro",
+      "naturalidade": "Porto Alegre - RS"
+    },
+    "contact": {
+      "telefonePessoal": "(51) 91111-2222",
+      "telefoneResidencial": null,
+      "emailPessoal": "carlos@gmail.com",
+      "emailCorporativo": "carlos.souza@empresa.com"
+    },
+    "address": {
+      "cep": "90000-000",
+      "rua": "Av. Ipiranga",
+      "numero": "300",
+      "complemento": "Sala 12",
+      "bairro": "Centro",
+      "cidade": "Porto Alegre",
+      "estado": "RS"
+    },
+    "professional": {
+      "cargo": "Desenvolvedor",
+      "sector": "Tecnologia",
+      "matricula": "EMP003",
+      "dataAdmissao": "2020-01-20",
+      "tipoContrato": "clt",
+      "regimeTrabalho": "remoto",
+      "jornada": "40",
+      "salario": "5000"
+    },
+    "documentation": {
+      "carteiraTrabalho": "5556667 88",
+      "pis": "555.66677.88-1",
+      "tituloEleitor": null,
+      "reservista": "654321",
+      "cnh": "98765432100",
+      "dependentes": null,
+      "certificados": "Angular Avançado"
+    },
+    "health": {
+      "planoSaude": null,
+      "numeroCarteirinha": null,
+      "dependentesPlano": null,
+      "alergias": null,
+      "valeTransporte": "Tri Vale 445566",
+      "contaBancaria": "Banco 789 AG 1011 CC 121314"
+    },
+    "family": {
+      "conjuge": null,
+      "filhos": "0",
+      "dependentes": null
+    },
+    "access": {
+      "perfilAcesso": "admin"
+    },
+    "photo": null
+  }
+]
