@@ -226,6 +226,14 @@
     "add": "Agregar a favoritos",
     "remove": "Quitar de favoritos"
   },
+  "roleSwitcher": {
+    "label": "Rol",
+    "option": {
+      "funcionario": "Empleado",
+      "coordenador": "Coordinador",
+      "admin": "Admin"
+    }
+  },
   "profile": {
     "title": "Mi Perfil",
     "changeAvatar": "Cambiar avatar",
@@ -247,7 +255,7 @@
     "appearanceTab": "Apariencia",
     "permissionsTab": "Permisos",
     "sectorsTab": "Sectores",
-    "theme": "Tema",
+    "theme": "Temas",
     "logo": "Logo",
     "uploadLogo": "Subir logo",
     "darkTheme": "Oscuro",
