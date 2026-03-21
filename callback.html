@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecionando para a integracao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <script>
+      (() => {
+        const callbackUrl = new URL(window.location.href);
+        const appRootUrl = new URL('.', callbackUrl);
+        const targetUrl = new URL(appRootUrl.toString());
+        const route = '/integracoes/melhor-envio';
+
+        targetUrl.hash = `#${route}${callbackUrl.search}`;
+        window.location.replace(targetUrl.toString());
+      })();
+    </script>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: Arial, sans-serif;
+        background: #f6eee4;
+        color: #2f2117;
+      }
+
+      main {
+        width: min(92vw, 480px);
+        padding: 24px;
+        border-radius: 16px;
+        background: rgba(255, 250, 243, 0.96);
+        border: 1px solid rgba(96, 66, 40, 0.12);
+        box-shadow: 0 18px 40px rgba(70, 44, 24, 0.12);
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: 1.25rem;
+      }
+
+      p {
+        margin: 0;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Redirecionando...</h1>
+      <p>
+        O retorno do Melhor Envio foi recebido. Se nada acontecer em alguns segundos, abra a
+        aplicacao e acesse manualmente `#/integracoes/melhor-envio`.
+      </p>
+    </main>
+  </body>
+</html>
