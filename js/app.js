@@ -32,11 +32,12 @@
   const traitList = document.getElementById('trait-list');
   const inventoryList = document.getElementById('inventory-list');
   const steps = [
-    {heading:'traits-title',title:'Sua origem e capacidades',kicker:'01 — HERANÇA'},
-    {heading:'combat-title',title:'Prepare sua carga',kicker:'02 — CARGA'},
-    {heading:'role-title',title:'Seu lugar na nave',kicker:'03 — A BORDO'},
-    {heading:'story-title',title:'Conte sua história',kicker:'04 — HISTÓRIA'},
-    {heading:'identity-title',title:'Quem é seu explorador?',kicker:'05 — REGISTRO PESSOAL'}
+    {heading:'heritage-title',title:'Escolha sua espécie',kicker:'01 — ESPÉCIE'},
+    {heading:'traits-title',title:'Vida e características',kicker:'02 — CAPACIDADES'},
+    {heading:'combat-title',title:'Prepare sua carga',kicker:'03 — CARGA'},
+    {heading:'role-title',title:'Seu lugar na nave',kicker:'04 — A BORDO'},
+    {heading:'story-title',title:'Conte sua história',kicker:'05 — HISTÓRIA'},
+    {heading:'identity-title',title:'Quem é seu explorador?',kicker:'06 — REGISTRO PESSOAL'}
   ];
   const stepCards = steps.map(step => document.getElementById(step.heading).closest('.card'));
   let currentStep = 0;
@@ -189,6 +190,18 @@
   }
   function renderHeritage() {
     const heritage = rules.heritages[character.heritage];
+    form.elements.heritage.value = character.heritage;
+    document.querySelectorAll('.heritage-card').forEach(card => {
+      const selected = card.dataset.heritage === character.heritage;
+      card.setAttribute('aria-pressed',String(selected));
+    });
+    document.getElementById('heritage-detail').hidden = !heritage;
+    document.getElementById('heritage-name').textContent = heritage?.name || '';
+    document.getElementById('heritage-hp').textContent = heritage ? `${heritage.hp} PV base` : '';
+    document.getElementById('heritage-description').textContent = heritage?.description || '';
+    const detailImage = document.getElementById('heritage-detail-image');
+    detailImage.src = heritage ? `assets/heritages/${character.heritage}.png` : '';
+    detailImage.alt = heritage ? `Ilustração da espécie ${heritage.name}` : '';
     const choiceField = document.getElementById('heritage-choice-field');
     choiceField.hidden = !heritage?.choices;
     if (heritage?.choices) {
@@ -314,7 +327,7 @@
     }));
   }
   function renderForm() {
-    setOptions(form.elements.heritage,Object.entries(rules.heritages).map(([id,item])=>[id,item.name]),'Escolha sua herança',character.heritage);
+    form.elements.heritage.value = character.heritage;
     const deferred = new Set(['heritageChoice','heritageBonus','weaponGroup','masteredWeapon','bonusWeapon','equippedWeapon']);
     editable.forEach(key => {
       const control = form.elements[key];
@@ -397,16 +410,16 @@
     const missing = [
       [!character.heritage,0,'Escolha uma herança.'],
       [character.heritage === 'salimar' && !character.heritageChoice,0,'Escolha uma característica Salimar.'],
-      [character.traitIds.some(id=>!id),0,'Escolha todas as características iniciais.'],
-      [character.heritage === 'ilvian' && !character.heritageBonus,0,'Escolha a característica cibernética adicional do Ilvian.'],
-      [!document.getElementById('hidden-weapon-field').hidden && !character.hiddenWeaponType,0,'Escolha o tipo da arma oculta.'],
-      [!character.weaponGroup,1,'Escolha uma proficiência com armas.'],
-      [character.weaponGroup !== 'Improvisadas' && !character.masteredWeapon,1,'Escolha a arma dominada.'],
-      [character.heritage === 'gens' && !character.bonusWeapon,1,'Escolha a arma adicional dos Gens.'],
-      [!character.equippedWeapon,1,'Escolha a arma inicial.'],
-      [!character.role,2,'Escolha uma função e seu ofício.'],
-      [character.role === 'other' && !character.roleOther.trim(),2,'Descreva sua função ou especialidade.'],
-      [!character.name.trim(),4,'Informe o nome do personagem.']
+      [character.traitIds.some(id=>!id),1,'Escolha todas as características iniciais.'],
+      [character.heritage === 'ilvian' && !character.heritageBonus,1,'Escolha a característica cibernética adicional do Ilvian.'],
+      [!document.getElementById('hidden-weapon-field').hidden && !character.hiddenWeaponType,1,'Escolha o tipo da arma oculta.'],
+      [!character.weaponGroup,2,'Escolha uma proficiência com armas.'],
+      [character.weaponGroup !== 'Improvisadas' && !character.masteredWeapon,2,'Escolha a arma dominada.'],
+      [character.heritage === 'gens' && !character.bonusWeapon,2,'Escolha a arma adicional dos Gens.'],
+      [!character.equippedWeapon,2,'Escolha a arma inicial.'],
+      [!character.role,3,'Escolha uma função e seu ofício.'],
+      [character.role === 'other' && !character.roleOther.trim(),3,'Descreva sua função ou especialidade.'],
+      [!character.name.trim(),5,'Informe o nome do personagem.']
     ].find(([condition])=>condition);
     if (missing) {
       showEditor();
@@ -434,6 +447,34 @@
     form.append(card);
     card.querySelector('.card-icon').textContent = String(index+1).padStart(2,'0');
   });
+  const heritageCards = document.getElementById('heritage-cards');
+  Object.entries(rules.heritages).forEach(([id,heritage]) => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'heritage-card';
+    card.dataset.heritage = id;
+    card.setAttribute('aria-pressed','false');
+    const image = document.createElement('img');
+    image.src = `assets/heritages/${id}.png`;
+    image.alt = '';
+    image.loading = 'lazy';
+    const name = document.createElement('strong');
+    name.textContent = heritage.name;
+    const hp = document.createElement('small');
+    hp.textContent = `${heritage.hp} PV base`;
+    card.append(image,name,hp);
+    heritageCards.append(card);
+  });
+  heritageCards.addEventListener('click',event => {
+    const card = event.target.closest('.heritage-card');
+    if (!card) return;
+    readForm();
+    character.heritage = card.dataset.heritage;
+    renderRules();
+    feedback.hidden = true;
+    saveCharacter();
+    requestAnimationFrame(() => window.scrollTo({top:document.documentElement.scrollHeight,behavior:'smooth'}));
+  });
   form.addEventListener('input',handleInput);
   form.addEventListener('change',handleInput);
   document.getElementById('add-item').addEventListener('click',()=>{
@@ -460,6 +501,7 @@
   });
   document.getElementById('back-button').addEventListener('click',()=>{showEditor();showStep(currentStep);window.scrollTo({top:0,behavior:'smooth'});});
   document.getElementById('previous-step').addEventListener('click',()=>{showStep(currentStep-1);feedback.hidden=true;document.getElementById('step-title').scrollIntoView({block:'start',behavior:'smooth'});});
+  document.getElementById('back-to-heritage').addEventListener('click',()=>{showStep(0);feedback.hidden=true;window.scrollTo({top:0,behavior:'smooth'});});
   document.getElementById('next-step').addEventListener('click',()=>{showStep(currentStep+1);feedback.hidden=true;document.getElementById('step-title').scrollIntoView({block:'start',behavior:'smooth'});});
   document.getElementById('export-button').addEventListener('click',exportCharacter);
   document.getElementById('preview-export-button').addEventListener('click',exportCharacter);

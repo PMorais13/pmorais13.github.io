@@ -23,7 +23,7 @@
       <section class="hero" aria-labelledby="page-title">
         <div class="eyebrow"><span class="eyebrow-line"></span> ARQUIVO DE PERSONAGEM <span class="eyebrow-line"></span></div>
         <h1 id="page-title">Sua próxima aventura <em>começa aqui.</em></h1>
-        <p>Comece pela herança: ela define sua vida inicial e suas capacidades próprias. Depois escolha características, armas e ofício.</p>
+        <p>Comece pela espécie: ela define sua vida inicial e suas capacidades próprias. Depois escolha características, armas e ofício.</p>
         <div class="hero-meta"><span><span class="pulse" aria-hidden="true"></span> SALVO NESTE DISPOSITIVO</span><span>✧ TINYD6</span></div>
       </section>
 
@@ -31,7 +31,7 @@
 
       <section id="editor-view" aria-label="Editor da ficha">
         <div class="section-intro"><div><p id="step-kicker" class="section-kicker">01 — HERANÇA</p><h2 id="step-title">Sua origem e capacidades</h2></div><span id="save-status" class="save-status" aria-live="polite">Pronto para preencher</span></div>
-        <div class="step-progress" aria-label="Progresso da ficha"><span id="step-count">Etapa 1 de 5</span><div class="progress-track"><span id="progress-fill"></span></div></div>
+        <div class="step-progress" aria-label="Progresso da ficha"><span id="step-count">Etapa 1 de 6</span><div class="progress-track"><span id="progress-fill"></span></div></div>
         <p class="required-note" hidden><span aria-hidden="true">*</span> Para exportar, escolha herança, características, armas e função, e informe o nome.</p>
         <form id="character-form" novalidate>
           <section class="card" aria-labelledby="identity-title">
@@ -54,15 +54,29 @@
             <div class="rule-detail">Teste comum: 2d6. Vantagem: 3d6. Desvantagem: 1d6. Um 5 ou 6 em qualquer dado é sucesso.</div>
           </section>
 
+          <section class="card" aria-labelledby="heritage-title">
+            <div class="card-heading"><span class="card-icon" aria-hidden="true">01</span><div><p class="card-kicker">ORIGEM</p><h3 id="heritage-title">Escolha sua espécie</h3></div></div>
+            <p class="card-help heritage-help">Sua espécie define a vida base e uma capacidade própria. Escolha um card para conhecer seus detalhes.</p>
+            <input id="heritage" name="heritage" type="hidden">
+            <div id="heritage-cards" class="heritage-cards" role="group" aria-label="Espécies disponíveis"></div>
+            <div id="heritage-detail" class="heritage-detail" aria-live="polite" hidden>
+              <img id="heritage-detail-image" class="heritage-detail-image" alt="">
+              <div class="heritage-detail-heading"><div><span class="heritage-detail-label">ESPÉCIE SELECIONADA</span><h4 id="heritage-name"></h4></div><span id="heritage-hp" class="heritage-hp"></span></div>
+              <p id="heritage-description" class="heritage-description"></p>
+              <div class="field" id="heritage-choice-field" hidden><label for="heritageChoice">Característica da herança</label><select id="heritageChoice" name="heritageChoice"></select></div>
+              <div class="field"><label>Característica da Herança <span class="label-hint">Heritage Trait</span></label><div id="heritage-trait" class="rule-detail"></div></div>
+            </div>
+          </section>
+
           <section class="card" aria-labelledby="traits-title">
-            <div class="card-heading"><span class="card-icon" aria-hidden="true">03</span><div><p class="card-kicker">ORIGEM &amp; CAPACIDADES</p><h3 id="traits-title">Herança e características</h3></div></div>
-            <div class="fields"><div class="field"><label for="heritage">Herança / Espécie</label><select id="heritage" name="heritage"><option value="">Escolha sua herança</option></select></div><div class="field" id="heritage-choice-field" hidden><label for="heritageChoice">Característica da herança</label><select id="heritageChoice" name="heritageChoice"></select></div><div class="field"><label>Característica da Herança <span class="label-hint">Heritage Trait</span></label><div id="heritage-trait" class="rule-detail">Escolha uma herança para ver suas capacidades.</div></div></div>
+            <div class="card-heading"><span class="card-icon" aria-hidden="true">02</span><div><p class="card-kicker">CAPACIDADES</p><h3 id="traits-title">Vida e características</h3></div></div>
+            <button id="back-to-heritage" class="step-one-link" type="button">← Voltar para a escolha da espécie</button>
             <div class="subheading">Pontos de vida</div>
             <div class="fields three"><div class="field"><label for="hpBase">Base</label><output id="hpBase">—</output></div><div class="field"><label for="hpMax">Máxima</label><output id="hpMax">—</output></div><div class="field"><label for="hpCurrent">Inicial / atual</label><output id="hpCurrent">—</output></div><div class="field" id="armor-hp-field" hidden><label for="armorHp">Proteção com armadura</label><output id="armorHp">3</output></div></div><p class="field-help health-help">Calculada pela herança e pelas características escolhidas. A ficha começa com a vida cheia.</p>
             <div class="subheading">Características iniciais</div>
             <p id="trait-count-help" class="field-help">Escolha três características diferentes do livro.</p>
             <p class="field-help trait-rule-help">A característica da herança é adicional. Psiônico não está disponível para Autoborgs e Hologramas; características cibernéticas têm limite de duas, exceto Ilvians.</p>
-            <p class="field-help trait-rule-help">Pilotagem não é uma característica desta lista: escolher a função Piloto na terceira etapa concede essa especialidade sem gastar um dos três espaços.</p>
+            <p class="field-help trait-rule-help">Pilotagem não é uma característica desta lista: escolher a função Piloto na quarta etapa concede essa especialidade sem gastar um dos três espaços.</p>
             <p id="shield-overlap-help" class="field-help trait-rule-help" hidden>Aprendiz do Escudo de Braço e Portador de Escudo dão o mesmo teste de Esquiva com 2d6. Os efeitos não se acumulam; escolher ambos ocupa dois espaços.</p>
             <div id="trait-list" class="trait-list"></div>
             <div id="heritage-bonus-field" class="field" hidden><label for="heritageBonus">Característica cibernética adicional da herança</label><select id="heritageBonus" name="heritageBonus"></select><div id="heritage-bonus-detail" class="rule-detail" hidden></div></div>

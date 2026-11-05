@@ -2,21 +2,21 @@
 // Fonte no projeto: PDF, páginas 20–47 (numeração impressa: 19–46).
 window.TinyFrontiersRules = Object.freeze({
   heritages: {
-    human: {name:'Humano', hp:6, traits:[], extraTrait:true},
-    gens: {name:'Gens', hp:6, traits:[['Mestre da Guerra','Domina uma arma adicional e tem vantagem ao usá-la.']]},
-    autoborg: {name:'Autoborg', hp:8, traits:[['Visão no Escuro','Enxerga mesmo na escuridão total.'],['Robô','Não precisa comer, dormir ou respirar; testes para curá-lo sofrem desvantagem.']]},
-    khalumra: {name:'Khalumra', hp:4, traits:[['Agilidade Incrível','Ao ser atingido, teste 1d6; se tiver sucesso, evita o dano. A ação Esquiva não oferece benefício.']]},
-    salimar: {name:'Salimar', hp:5, choices:[['Cura Pirotérmica','Dano de fogo natural, sem Xenotech, cura a mesma quantidade de PV.'],['Cura Criotérmica','Dano de frio natural, sem Xenotech, cura a mesma quantidade de PV.']]},
-    invex: {name:'Invex', hp:5, traits:[['Armadura Quitinosa','Teste de Esquiva tem sucesso com 4, 5 ou 6.'],['Camuflagem Reativa','Vantagem ao se esconder ou se mover furtivamente.']]},
-    tyranax: {name:'Tyranax', hp:5, traits:[['Fúria Incessante','Ataques corpo a corpo causam +1 de dano quando algum dado mostra 6.']]},
-    ilvian: {name:'Ilvian', hp:6, traits:[['Prodígio Cibernético','Escolhe uma característica cibernética adicional; pode ter até três no total.']], bonusCyber:true},
-    jkheri: {name:'Jkheri', hp:8, traits:[['Reservado','Vantagem para esquivar de perguntas ou tentativas de obter informações sobre você.']]},
-    splinter: {name:'Splinter', hp:5, traits:[['Inquietante','Vantagem para intimidar, ameaçar ou perturbar; uma repetição de teste por dia.']]},
-    nain: {name:'Nain', hp:7, traits:[['Inventor','Vantagem em testes para modificar ou aprimorar tecnologia.']]},
-    ahleghiri: {name:'Ahleghiri', hp:6, traits:[['Devorador de Sol','Sob luz solar direta, sem realizar ações, recupera 1 PV a cada dez minutos.']]},
-    hologram: {name:'Holograma', hp:8, traits:[['Luz Sólida','Não pode ser curado por testes ou equipamento; recarrega diariamente. Duas vezes por dia, pode testar com desvantagem para recuperar 1 PV.']]},
-    grunka: {name:'Grunka', hp:7, traits:[['Rancoroso','Na próxima ação deve atacar quem o feriu, salvo se passar em resistência com desvantagem; esse ataque causa +1 de dano.']]},
-    bilk: {name:'Bilk', hp:5, traits:[['Precognição','Ao rolar 1 em um teste, pode perder 1 PV para transformar esse dado em 6.']]}
+    human: {name:'Humano', hp:6, description:'Versátil e adaptável, começa com uma característica adicional à sua escolha.', traits:[], extraTrait:true},
+    gens: {name:'Gens', hp:6, description:'Combatente especializado que domina uma arma a mais e se destaca ao usá-la.', traits:[['Mestre da Guerra','Domina uma arma adicional e tem vantagem ao usá-la.']]},
+    autoborg: {name:'Autoborg', hp:8, description:'Ser robótico resistente, capaz de enxergar no escuro e viver sem necessidades biológicas.', traits:[['Visão no Escuro','Enxerga mesmo na escuridão total.'],['Robô','Não precisa comer, dormir ou respirar; testes para curá-lo sofrem desvantagem.']]},
+    khalumra: {name:'Khalumra', hp:4, description:'Pequeno e veloz, confia na agilidade para escapar de golpes que atingiriam outros exploradores.', traits:[['Agilidade Incrível','Ao ser atingido, teste 1d6; se tiver sucesso, evita o dano. A ação Esquiva não oferece benefício.']]},
+    salimar: {name:'Salimar', hp:5, description:'Anfíbio adaptado a ambientes aquáticos ou úmidos. Escolhe se o fogo ou o frio natural restaura sua vida.', choices:[['Cura Pirotérmica','Dano de fogo natural, sem Xenotech, cura a mesma quantidade de PV.'],['Cura Criotérmica','Dano de frio natural, sem Xenotech, cura a mesma quantidade de PV.']]},
+    invex: {name:'Invex', hp:5, description:'Criatura de carapaça quitinosa e camuflagem reativa, difícil de acertar ou detectar.', traits:[['Armadura Quitinosa','Teste de Esquiva tem sucesso com 4, 5 ou 6.'],['Camuflagem Reativa','Vantagem ao se esconder ou se mover furtivamente.']]},
+    tyranax: {name:'Tyranax', hp:5, description:'Predador imponente que canaliza sua fúria em ataques corpo a corpo mais fortes.', traits:[['Fúria Incessante','Ataques corpo a corpo causam +1 de dano quando algum dado mostra 6.']]},
+    ilvian: {name:'Ilvian', hp:6, description:'Povo ligado à tecnologia e aos aprimoramentos do corpo, com espaço para uma característica cibernética extra.', traits:[['Prodígio Cibernético','Escolhe uma característica cibernética adicional; pode ter até três no total.']], bonusCyber:true},
+    jkheri: {name:'Jkheri', hp:8, description:'Reservado e resistente, sabe proteger suas informações de perguntas indiscretas.', traits:[['Reservado','Vantagem para esquivar de perguntas ou tentativas de obter informações sobre você.']]},
+    splinter: {name:'Splinter', hp:5, description:'Alienígena enigmático cuja presença inquieta e intimida quem cruza seu caminho.', traits:[['Inquietante','Vantagem para intimidar, ameaçar ou perturbar; uma repetição de teste por dia.']]},
+    nain: {name:'Nain', hp:7, description:'Inventor robusto e engenhoso, especialmente hábil para modificar tecnologia.', traits:[['Inventor','Vantagem em testes para modificar ou aprimorar tecnologia.']]},
+    ahleghiri: {name:'Ahleghiri', hp:6, description:'Explorador que recupera forças sob luz solar direta quando pode parar e descansar.', traits:[['Devorador de Sol','Sob luz solar direta, sem realizar ações, recupera 1 PV a cada dez minutos.']]},
+    hologram: {name:'Holograma', hp:8, description:'Projeção de luz sólida que não depende de cura comum e recarrega suas energias diariamente.', traits:[['Luz Sólida','Não pode ser curado por testes ou equipamento; recarrega diariamente. Duas vezes por dia, pode testar com desvantagem para recuperar 1 PV.']]},
+    grunka: {name:'Grunka', hp:7, description:'Forte e obstinado, reage com ainda mais força contra quem o feriu.', traits:[['Rancoroso','Na próxima ação deve atacar quem o feriu, salvo se passar em resistência com desvantagem; esse ataque causa +1 de dano.']]},
+    bilk: {name:'Bilk', hp:5, description:'Ser ligado à precognição que pode sacrificar vida para transformar uma falha em sucesso.', traits:[['Precognição','Ao rolar 1 em um teste, pode perder 1 PV para transformar esse dado em 6.']]}
   },
   traits: {
     acrobat:['Acrobata','Vantagem em acrobacias, saltos longos, escaladas e equilíbrio.'],
