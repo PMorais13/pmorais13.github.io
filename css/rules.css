@@ -1,0 +1,145 @@
+.brand-home {
+  color:var(--text);
+  text-decoration:none
+}
+.brand-home:hover {
+  color:var(--text)
+}
+.rules-main {
+  max-width:920px;
+  padding-bottom:54px
+}
+.rules-hero {
+  padding:52px 0 31px
+}
+.rules-hero .section-kicker {
+  margin:0 0 8px;
+  color:var(--cyan)
+}
+.rules-hero h1 {
+  margin:0;
+  font-size:clamp(38px,6vw,58px);
+  letter-spacing:-.055em;
+  line-height:1.1
+}
+.rules-hero h1 em {
+  color:var(--cyan);
+  font-style:normal
+}
+.rules-hero>p:not(.section-kicker) {
+  max-width:640px;
+  margin:14px 0 0;
+  color:var(--muted);
+  font-size:15px
+}
+.rules-highlights {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:25px
+}
+.rules-highlights span {
+  display:inline-flex;
+  align-items:baseline;
+  gap:8px;
+  padding:8px 12px;
+  border:1px solid #376275;
+  border-radius:9px;
+  background:#12303d;
+  color:#d7e8f1;
+  font-size:12px
+}
+.rules-highlights strong {
+  color:var(--cyan);
+  font-size:18px
+}
+.rules-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px
+}
+.rule-card {
+  min-width:0;
+  padding:21px 23px;
+  border:1px solid #2a3853;
+  border-radius:14px;
+  background:var(--surface)
+}
+.rule-card-wide {
+  grid-column:1/-1
+}
+.rule-card h2 {
+  margin:0 0 12px;
+  color:var(--cyan);
+  font-size:17px;
+  letter-spacing:-.015em
+}
+.rule-card p {
+  margin:0;
+  color:#d6e0ef;
+  font-size:14px;
+  line-height:1.58
+}
+.rule-card p+p {
+  margin-top:10px
+}
+.rule-card strong {
+  color:#fff
+}
+.action-list {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px 24px;
+  margin:15px 0 0;
+  padding-left:19px;
+  color:#d6e0ef;
+  font-size:13px;
+  line-height:1.5
+}
+.action-list li {
+  padding-left:2px
+}
+.rules-note {
+  margin:24px 0 18px;
+  color:var(--muted);
+  font-size:13px
+}
+.rules-bottom {
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:18px
+}
+.rules-bottom .button {
+  min-width:180px;
+  text-decoration:none
+}
+.source-link {
+  font-size:13px
+}
+@media(max-width:700px) {
+  .rules-grid {
+    grid-template-columns:1fr
+  }
+  .rule-card-wide {
+    grid-column:auto
+  }
+}
+@media(max-width:520px) {
+  .rules-hero {
+    padding:37px 0 25px
+  }
+  .rule-card {
+    padding:18px
+  }
+  .action-list {
+    grid-template-columns:1fr
+  }
+  .rules-bottom {
+    align-items:stretch;
+    flex-direction:column
+  }
+  .rules-bottom .button {
+    width:100%
+  }
+}
