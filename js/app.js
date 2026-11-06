@@ -228,9 +228,12 @@
       const all = Object.values(rules.weapons).flat().filter(name => name !== 'Arma improvisada' && name !== 'Estilo marcial' && name !== character.masteredWeapon);
       character.bonusWeapon = setOptions(form.elements.bonusWeapon,all.map(name=>[name,name]),'Escolha a arma adicional',character.bonusWeapon);
     } else { character.bonusWeapon = ''; form.elements.bonusWeapon.value = ''; }
-    const available = Object.entries(rules.weapons)
-      .filter(([group]) => group !== 'Desarmado' || character.weaponGroup === 'Desarmado')
-      .flatMap(([group,names]) => names.map(name => [name,`${name} — ${group}`]));
+    const initialWeapons = [character.masteredWeapon,character.bonusWeapon];
+    if (character.weaponGroup === 'Improvisadas') initialWeapons.push(...rules.weapons.Improvisadas);
+    const available = initialWeapons.filter(Boolean).map(name => {
+      const group = Object.entries(rules.weapons).find(([,names]) => names.includes(name))?.[0];
+      return [name,`${name} — ${group}`];
+    });
     character.equippedWeapon = setOptions(form.elements.equippedWeapon,available,'Escolha sua arma inicial',character.equippedWeapon);
   }
   function calculate() {
@@ -436,7 +439,8 @@
   function exportCharacter() {
     if (!validateExport()) return;
     try {
-      window.generateCharacterPdf({...character,heritage:character.heritageName},roleLabel(character));
+      const portraitData = window.TinyFrontiersPortraits?.[character.heritage] || '';
+      window.generateCharacterPdf({...character,heritage:character.heritageName,portrait:portraitData},roleLabel(character));
       showFeedback('PDF gerado. Verifique os downloads do seu navegador.');
     } catch(error) {
       console.error('Falha ao gerar PDF:',error);

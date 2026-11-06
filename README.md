@@ -24,6 +24,8 @@ Gerador de uma ficha de personagem para **Tiny Frontiers: Revised (TinyD6)**. Fu
 - `js/rules.js`: heranças, características e armas adaptadas e traduzidas do PDF incluído no projeto.
 - `assets/heritages/`: miniaturas das ilustrações de espécies extraídas das páginas 24–38 do PDF incluído no projeto e ilustrações originais dos Replicantes e Errantes do Vácuo.
 - `js/pdf.js`: composição do PDF.
+- `js/portraits.js`: retratos compactos embutidos para exportar PDF mesmo ao abrir `index.html` por `file://`.
+- `scripts/build-portraits.ps1`: regenera os retratos embutidos a partir de `assets/heritages/*.png`.
 - `js/vendor/jspdf.umd.min.js`: jsPDF 2.5.2, distribuído sob licença MIT ([projeto](https://github.com/parallax/jsPDF)).
 
 Nesta campanha, a função escolhida define automaticamente o ofício e sua vantagem em testes ligados à especialidade. Essa é uma adaptação para evitar duas escolhas redundantes; no livro, o ofício familiar é criado separadamente pelo jogador e o mestre decide quando se aplica. Ataques continuam seguindo as regras de proficiência e domínio de armas. A vida inicial, os bônus de características, os 10 GalCreds e o Kit do Explorador são aplicados automaticamente. Crença e história continuam livres.
