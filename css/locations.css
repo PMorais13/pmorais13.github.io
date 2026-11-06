@@ -1,0 +1,51 @@
+.location-image,
+.location-modal-image {
+  padding:0;
+  background:#080e1c;
+  object-fit:contain
+}
+.locations-dialog .species-modal-body {
+  grid-template-columns:1fr;
+  gap:16px
+}
+.location-modal-image {
+  position:static;
+  width:100%;
+  height:auto;
+  max-height:none;
+  object-fit:contain
+}
+.locations-dialog .species-modal-details {
+  padding-top:0
+}
+.location-card-summary {
+  display:block;
+  min-height:38px;
+  margin-top:11px;
+  color:#bdc9dc;
+  font-size:12px;
+  line-height:1.5
+}
+.location-lore-text {
+  max-height:10rem;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding-right:10px;
+  white-space:pre-line;
+  scrollbar-color:#60748f #111c32;
+  scrollbar-width:thin
+}
+.location-lore-text:focus-visible {
+  outline:2px solid var(--purple);
+  outline-offset:3px
+}
+.species-lore-section .location-history-empty {
+  color:var(--muted);
+  font-style:italic
+}
+@media(max-width:700px) {
+  .location-modal-image {
+    height:auto;
+    min-height:0
+  }
+}

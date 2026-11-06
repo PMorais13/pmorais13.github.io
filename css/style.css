@@ -119,6 +119,16 @@ a {
   outline:3px solid var(--purple);
   outline-offset:2px
 }
+@media(max-width:900px) {
+  .site-header {
+    flex-wrap:wrap;
+    padding:10px 0
+  }
+  .header-actions {
+    flex-wrap:wrap;
+    justify-content:flex-end
+  }
+}
 main {
   max-width:720px;
   margin:0 auto

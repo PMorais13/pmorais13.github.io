@@ -13,7 +13,8 @@ $quality.Param[0] = [System.Drawing.Imaging.EncoderParameter]::new(
 )
 
 $entries = foreach ($file in Get-ChildItem -LiteralPath $sourceDir -Filter '*.png' |
-    Where-Object BaseName -ne 'replicant-animal' | Sort-Object BaseName) {
+    Where-Object { $_.BaseName -ne 'replicant-animal' -and $_.BaseName -notlike 'sintossauro-*' } |
+    Sort-Object BaseName) {
   $source = [System.Drawing.Image]::FromFile($file.FullName)
   try {
     $height = [Math]::Min(600, $source.Height)

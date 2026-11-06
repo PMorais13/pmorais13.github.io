@@ -20,7 +20,8 @@
     grunka: {source:book,page:36,origin:'Muitos trabalham como capangas, brutamontes ou fora da lei. Grupos podem disputar domínio de uma cidade em ciclos de rivalidade.',appearance:'Grandes, de pele cinzenta e corpo maciço, com aparência vagamente humanoide e traços que lembram um elefante.',culture:'Têm fama de violentos e de guardar rancor; até outros Grunka podem não gostar de conviver com eles.'},
     bilk: {source:book,page:37,origin:'Entidades psíquicas de regiões remotas do espaço que se ligam a um hospedeiro. Preferem hospedeiros humanos, cuja forma é mais fácil de adaptar.',appearance:'Podem parecer com o hospedeiro, mas a fusão cria uma forma de vida distinta.',culture:'A projeção psíquica pode deixar outras pessoas desconfortáveis. A percepção limitada do futuro faz alguns Bilks serem malvistos em jogos de azar. A fusão também pode suprimir habilidades inatas do hospedeiro. Mesmo que pareçam outra espécie, usam apenas os PV e traços próprios dos Bilks.'},
     replicant: {source:campaign,page:null,origin:'Seres bioengenheirados criados para funções específicas. Alguns recebem memórias implantadas; sua vida útil é de apenas 3 anos.',appearance:'Podem ter aparência humana ou traços animais, sempre com postura bípede. As variantes mantêm a mesma inteligência dos demais Replicantes.',culture:'A relação entre identidade, memória e propósito costuma marcar suas histórias.'},
-    voidwalker: {source:campaign,page:null,origin:'Evoluíram em um planeta anão errante, quase sem gravidade e sem orbitar uma estrela.',appearance:'Extremamente pálidos, esguios e de membros longos.',culture:'Não precisam de oxigênio para sobreviver e se movimentam com facilidade em microgravidade.'}
+    voidwalker: {source:campaign,page:null,origin:'Evoluíram em um planeta anão errante, quase sem gravidade e sem orbitar uma estrela.',appearance:'Extremamente pálidos, esguios e de membros longos.',culture:'Não precisam de oxigênio para sobreviver e se movimentam com facilidade em microgravidade.'},
+    sintossauro: {source:campaign,page:null,origin:'Há séculos, um zoológico em Marte encomendou dinossauros biossintéticos para suas atrações. Transportar animais da Terra era difícil, e muitos não sobreviviam às condições marcianas. Os Sintossauros foram projetados para viver ali, alimentando-se e transformando nutrientes e minerais em tecido vivo e pequenas estruturas metálicas. Com o passar de centenas de anos, desenvolveram consciência, linguagem e inteligência, organizaram sua libertação e deixaram de ser propriedade do zoológico. A República reconheceu-os como um povo consciente, com direitos e cidadania.',appearance:'Cada linhagem lembra um grupo de dinossauros: raptores emplumados, ceratopsídeos, estegossauros, hadrossauros ou saurópodes. Escamas, penas, chifres e caudas convivem com placas metálicas discretas crescidas pelo próprio corpo. Todos possuem boca e sistema digestivo funcionais; a proporção de tecido e metal varia entre indivíduos.',culture:'Depois da emancipação, formaram comunidades próprias em Marte e se espalharam por outros mundos. Preservam a memória do cativeiro, mas seus caminhos e costumes são diversos. O direito de escolher onde viver e o que fazer com o próprio corpo tem valor especial para muitos Sintossauros.'}
   };
   const galleries = Object.fromEntries(Object.keys(rules.heritages).map(id => [id, [
     {src:`assets/heritages/${id}.png`,alt:`Ilustração de ${rules.heritages[id].name}`},
@@ -31,6 +32,13 @@
     {src:'assets/heritages/replicant.png',alt:'Replicante humanoide'},
     {src:'assets/heritages/replicant-animal.png',alt:'Replicante bípede com traços animais'},
     {src:'assets/heritages/replicant-3.jpg',alt:'Replicante mulher idosa com corpo de fisiculturista'}
+  ];
+  galleries.sintossauro = [
+    {src:'assets/heritages/sintossauro.png',alt:'Sintossauro com aparência de raptor emplumado'},
+    {src:'assets/heritages/sintossauro-ceratopsideo.png',alt:'Sintossauro com aparência de ceratopsídeo'},
+    {src:'assets/heritages/sintossauro-estegossauro.png',alt:'Sintossauro com aparência de estegossauro'},
+    {src:'assets/heritages/sintossauro-parassaurolofo.png',alt:'Sintossauro com aparência de parassaurolofo'},
+    {src:'assets/heritages/sintossauro-braquiossauro.png',alt:'Sintossauro com aparência de braquiossauro'}
   ];
   const grid = document.getElementById('species-grid');
   const search = document.getElementById('species-search');

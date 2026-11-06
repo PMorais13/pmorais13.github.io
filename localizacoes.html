@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Explore a Terra e outros destinos da campanha Exploradores em 2613.">
+  <title>Guia de localizações — Exploradores</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/rules.css">
+  <link rel="stylesheet" href="css/species.css">
+  <link rel="stylesheet" href="css/locations.css">
+  <script src="js/locations.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand brand-home" href="index.html"><span class="brand-mark" aria-hidden="true">✦</span><span>EXPLORADORES <small>/ TINY FRONTIERS</small></span></a>
+      <div class="header-actions"><a class="rules-link" href="especies.html">Guia de espécies ↗</a><a class="rules-link" href="regras.html">Regras rápidas ↗</a><a class="rules-link" href="index.html">← Voltar à ficha</a></div>
+    </header>
+    <main class="species-main">
+      <section class="rules-hero" aria-labelledby="locations-title">
+        <p class="section-kicker">ATLAS DE 2613</p>
+        <h1 id="locations-title">Onde a aventura <em>acontece?</em></h1>
+        <p>Da Terra recuperada aos assentamentos no espaço, conheça lugares que podem aparecer na campanha. Abra cada registro para ver o ambiente, a vida local e a história.</p>
+      </section>
+      <div class="species-tools">
+        <label class="species-search-label" for="locations-search">Buscar localização</label>
+        <input id="locations-search" type="search" placeholder="Digite um nome, tipo ou característica" autocomplete="off">
+        <p id="locations-count" class="species-count" aria-live="polite"></p>
+      </div>
+      <div id="locations-grid" class="species-grid" aria-label="Localizações"></div>
+      <p id="locations-empty" class="species-empty" hidden>Nenhuma localização encontrada. Tente outra busca.</p>
+      <p class="species-source">Este atlas descreve o cenário original da campanha em 2613. Os locais e seus detalhes podem crescer conforme a história avança.</p>
+    </main>
+    <dialog id="locations-dialog" class="species-dialog locations-dialog" aria-labelledby="locations-dialog-title">
+      <div class="species-dialog-panel">
+        <button id="locations-dialog-close" class="species-dialog-close" type="button" aria-label="Fechar detalhes">×</button>
+        <div id="locations-dialog-content"></div>
+      </div>
+    </dialog>
+    <footer class="site-footer"><span>✦ EXPLORADORES</span><span>Guia de localizações · 2613</span></footer>
+  </div>
+</body>
+</html>
