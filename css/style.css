@@ -766,7 +766,20 @@ input[aria-invalid=true] {
     display:none
   }
   .site-header {
-    min-height:68px
+    min-height:68px;
+    flex-wrap:wrap;
+    padding:10px 0
+  }
+  .header-actions {
+    flex-wrap:wrap;
+    justify-content:flex-end;
+    gap:6px
+  }
+  .header-actions .rules-link {
+    min-height:32px;
+    gap:4px;
+    padding:5px 7px;
+    font-size:10px
   }
   .hero {
     padding:58px 0 48px

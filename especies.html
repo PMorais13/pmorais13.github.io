@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Conheça a origem, a aparência e os costumes das espécies de Tiny Frontiers.">
+  <title>Guia de espécies — Exploradores</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/rules.css">
+  <link rel="stylesheet" href="css/species.css">
+  <script src="js/rules.js" defer></script>
+  <script src="js/species.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand brand-home" href="index.html"><span class="brand-mark" aria-hidden="true">✦</span><span>EXPLORADORES <small>/ TINY FRONTIERS</small></span></a>
+      <div class="header-actions"><a class="rules-link" href="regras.html">Regras rápidas ↗</a><a class="rules-link" href="index.html">← Voltar à ficha</a></div>
+    </header>
+    <main class="species-main">
+      <section class="rules-hero" aria-labelledby="species-title">
+        <p class="section-kicker">ARQUIVO DE ESPÉCIES</p>
+        <h1 id="species-title">Quem vive <em>pela galáxia?</em></h1>
+        <p>Conheça de onde cada espécie vem, como é e o que a torna única. As espécies do livro estão resumidas abaixo; Replicantes e Errantes do Vácuo são criações desta campanha.</p>
+      </section>
+      <div class="species-tools">
+        <label class="species-search-label" for="species-search">Buscar espécie</label>
+        <input id="species-search" type="search" placeholder="Digite um nome, origem ou característica" autocomplete="off">
+        <p id="species-count" class="species-count" aria-live="polite"></p>
+      </div>
+      <div id="species-grid" class="species-grid" aria-label="Espécies"></div>
+      <p id="species-empty" class="species-empty" hidden>Nenhuma espécie encontrada. Tente outra busca.</p>
+      <p class="species-source">As descrições do livro foram resumidas e adaptadas de <em>Tiny Frontiers: Revised</em>, páginas impressas 23–37 (PDF, páginas 24–38). As espécies da campanha têm origem e características próprias.</p>
+    </main>
+    <dialog id="species-dialog" class="species-dialog" aria-labelledby="species-dialog-title">
+      <div class="species-dialog-panel">
+        <button id="species-dialog-close" class="species-dialog-close" type="button" aria-label="Fechar detalhes">×</button>
+        <div id="species-dialog-content"></div>
+      </div>
+    </dialog>
+    <footer class="site-footer"><span>✦ EXPLORADORES</span><span>Guia de espécies · Tiny Frontiers</span></footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,350 @@
+.species-main {
+  max-width:1000px;
+  padding-bottom:54px
+}
+.species-main .rules-hero {
+  padding-top:48px
+}
+.species-tools {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:end;
+  gap:6px 16px;
+  margin:0 0 18px
+}
+.species-search-label {
+  grid-column:1/-1;
+  color:#e8efff;
+  font-size:13px;
+  font-weight:700
+}
+.species-tools input {
+  min-width:0
+}
+.species-count {
+  min-width:84px;
+  margin:0 0 12px;
+  color:var(--muted);
+  font-size:12px;
+  text-align:right
+}
+.species-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px
+}
+.species-entry {
+  min-width:0;
+  overflow:hidden;
+  border:1px solid #2a3853;
+  border-radius:16px;
+  background:var(--surface);
+  transition:border-color .15s,transform .15s,box-shadow .15s
+}
+.species-entry:hover {
+  border-color:#42d9e8a8;
+  transform:translateY(-2px);
+  box-shadow:0 9px 26px #0003
+}
+.species-entry:focus-within {
+  outline:3px solid var(--purple);
+  outline-offset:3px
+}
+.species-entry-trigger {
+  display:flex;
+  width:100%;
+  flex-direction:column;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:var(--text);
+  cursor:pointer;
+  text-align:left
+}
+.species-entry-trigger:focus-visible {
+  outline:0
+}
+.species-image {
+  display:block;
+  width:100%;
+  height:205px;
+  padding:8px;
+  object-fit:contain;
+  background:#e8e7e3
+}
+.species-entry-body {
+  padding:18px 20px 16px
+}
+.species-entry-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--line)
+}
+.species-card-heading {
+  display:block
+}
+.species-card-title {
+  display:block;
+  font-size:21px;
+  font-weight:800;
+  line-height:1.2
+}
+.species-origin-label {
+  display:inline-block;
+  margin-top:6px;
+  color:var(--cyan);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase
+}
+.species-open-hint {
+  display:block;
+  margin-top:10px;
+  color:var(--cyan);
+  font-size:11px;
+  font-weight:700
+}
+.species-hp {
+  flex:none;
+  color:var(--cyan);
+  font-size:12px;
+  font-weight:800
+}
+.species-lore-section {
+  margin-top:13px
+}
+.species-lore-section h3 {
+  margin:0 0 4px;
+  color:#d5dff1;
+  font-size:12px;
+  letter-spacing:.07em;
+  text-transform:uppercase
+}
+.species-lore-section p,.species-lore-section li {
+  margin:0;
+  color:#bdc9dc;
+  font-size:13px;
+  line-height:1.55
+}
+.species-lore-section ul {
+  margin:0;
+  padding-left:18px
+}
+.species-lore-section li+li {
+  margin-top:7px
+}
+.species-traits {
+  padding:12px;
+  border-left:3px solid var(--cyan);
+  border-radius:0 8px 8px 0;
+  background:#111c32
+}
+.species-page-ref {
+  margin:14px 0 0;
+  color:#7f8ca5;
+  font-size:10px
+}
+.species-empty {
+  margin:24px 0;
+  padding:20px;
+  border:1px dashed var(--line);
+  border-radius:12px;
+  color:var(--muted);
+  text-align:center
+}
+.species-source {
+  margin:22px 0 0;
+  color:#8190a9;
+  font-size:11px;
+  line-height:1.5
+}
+.species-dialog {
+  width:min(860px,calc(100% - 28px));
+  max-width:none;
+  max-height:min(90dvh,900px);
+  padding:0;
+  overflow:visible;
+  border:1px solid #45617d;
+  border-radius:18px;
+  background:transparent;
+  color:var(--text)
+}
+.species-dialog::backdrop {
+  background:#070c18d9;
+  backdrop-filter:blur(4px)
+}
+.species-dialog-panel {
+  position:relative;
+  max-height:min(90dvh,900px);
+  overflow:auto;
+  border-radius:17px;
+  background:var(--surface);
+  box-shadow:0 24px 80px #0008
+}
+.species-dialog-close {
+  position:sticky;
+  top:10px;
+  z-index:1;
+  display:grid;
+  place-items:center;
+  width:38px;
+  height:38px;
+  margin:10px 10px -48px auto;
+  border:1px solid #60748f;
+  border-radius:50%;
+  background:#0b1020e8;
+  color:var(--text);
+  font-size:24px;
+  line-height:1
+}
+.species-dialog-close:hover {
+  border-color:var(--cyan);
+  color:var(--cyan)
+}
+.species-dialog-close:focus-visible {
+  outline:3px solid var(--purple);
+  outline-offset:2px
+}
+.species-modal-body {
+  display:grid;
+  grid-template-columns:minmax(210px,.7fr) minmax(0,1.3fr);
+  align-items:start;
+  gap:24px;
+  padding:28px
+}
+.species-carousel {
+  position:sticky;
+  top:20px;
+  min-width:0
+}
+.species-modal-image {
+  display:block;
+  width:100%;
+  max-height:430px;
+  height:430px;
+  padding:8px;
+  border-radius:11px;
+  background:#e8e7e3;
+  object-fit:contain
+}
+.species-carousel-controls {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  margin-top:9px
+}
+.species-carousel-arrow {
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  border:1px solid #40506b;
+  border-radius:50%;
+  background:#101a30;
+  color:var(--text);
+  font-size:18px
+}
+.species-carousel-arrow:hover {
+  border-color:var(--cyan);
+  color:var(--cyan)
+}
+.species-carousel-counter {
+  min-width:48px;
+  color:var(--muted);
+  font-size:12px;
+  text-align:center
+}
+.species-carousel-indicators {
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:10px
+}
+.species-carousel-dot {
+  width:9px;
+  height:9px;
+  padding:0;
+  border:0;
+  border-radius:50%;
+  background:#64738a
+}
+.species-carousel-dot.active {
+  background:var(--cyan);
+  box-shadow:0 0 0 3px #42d9e82b
+}
+.species-carousel-arrow:focus-visible,.species-carousel-dot:focus-visible {
+  outline:3px solid var(--purple);
+  outline-offset:3px
+}
+.species-modal-details {
+  min-width:0;
+  padding:14px 0 4px
+}
+.species-modal-heading {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:end;
+  gap:8px 14px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--line)
+}
+.species-modal-heading .species-origin-label {
+  grid-column:1/-1;
+  margin:0
+}
+.species-modal-heading h2 {
+  margin:0;
+  font-size:clamp(22px,4vw,30px);
+  line-height:1.15
+}
+.species-modal-heading .species-hp {
+  white-space:nowrap
+}
+@media(max-width:700px) {
+  .species-modal-body {
+    grid-template-columns:1fr;
+    gap:14px;
+    padding:20px
+  }
+  .species-carousel {
+    position:static;
+    width:min(100%,340px);
+    margin:0 auto
+  }
+  .species-modal-image {
+    width:100%;
+    height:210px;
+    min-height:190px
+  }
+  .species-modal-details {
+    padding-top:0
+  }
+}
+@media(max-width:700px) {
+  .species-grid {
+    grid-template-columns:1fr
+  }
+  .species-image {
+    height:230px
+  }
+}
+@media(max-width:600px) {
+  .species-tools {
+    grid-template-columns:1fr
+  }
+  .species-count {
+    margin:4px 0 0;
+    text-align:left
+  }
+  .species-entry-body {
+    padding:16px
+  }
+  .species-card-title {
+    font-size:19px
+  }
+}

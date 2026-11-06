@@ -505,14 +505,14 @@
   document.getElementById('next-step').addEventListener('click',()=>{showStep(currentStep+1);feedback.hidden=true;document.getElementById('step-title').scrollIntoView({block:'start',behavior:'smooth'});});
   document.getElementById('export-button').addEventListener('click',exportCharacter);
   document.getElementById('preview-export-button').addEventListener('click',exportCharacter);
-  document.querySelector('.header-actions .rules-link').addEventListener('click',()=>{
+  document.querySelectorAll('.header-actions .rules-link').forEach(link=>link.addEventListener('click',()=>{
     try {
       sessionStorage.setItem(RULES_RETURN_KEY,JSON.stringify({
         step:currentStep,
         preview:!document.getElementById('preview-view').hidden
       }));
     } catch {}
-  });
+  }));
   document.getElementById('clear-button').addEventListener('click',()=>{
     if (!window.confirm('Limpar todos os dados desta ficha? Esta ação não pode ser desfeita.')) return;
     character = emptyCharacter();
