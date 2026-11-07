@@ -1,15 +1,17 @@
 # Exploradores — Tiny Frontiers
 
-Gerador de uma ficha de personagem para **Tiny Frontiers: Revised (TinyD6)**. Funciona como aplicação estática, sem conta, servidor ou compilação.
+Gerador de fichas de personagem para **Tiny Frontiers: Revised (TinyD6)**. Funciona como aplicação estática, sem conta, servidor ou compilação.
 
 ## Como usar
 
 1. Abra `index.html` no navegador do celular ou computador.
-2. Avance pelas seis etapas: espécie, vida e características, armas e equipamento, função e ofício familiar, história, e identidade. A espécie determina sua vida inicial e capacidade própria antes das demais escolhas.
+2. Na tela inicial, escolha **Criar nova ficha** ou abra uma ficha salva. Avance pelas seis etapas: espécie, vida e características, armas e equipamento, função e ofício familiar, história, e identidade. A espécie determina sua vida inicial e capacidade própria antes das demais escolhas.
 3. Use **Guia de espécies** para consultar origem, aparência, costumes e características das espécies, **Localizações** para explorar os lugares da campanha em 2613, **Regras rápidas** para ver um resumo do jogo, **Visualizar ficha** para conferir os dados e **Exportar PDF** para baixar a ficha A4.
-4. O formulário é salvo automaticamente no armazenamento local do navegador. Ao reabrir a página no mesmo navegador, a ficha volta a aparecer.
+4. Cada ficha é salva automaticamente no armazenamento local do navegador. Ao reabrir a página no mesmo navegador, elas aparecem na tela inicial.
 
-**Limpar ficha** apaga a ficha ativa após confirmação. Os dados ficam somente no navegador usado; limpar os dados do navegador também pode removê-los.
+Na etapa **Identidade**, você pode escolher uma imagem para o avatar do personagem. A imagem é recortada, reduzida e salva junto com a ficha neste navegador; também aparece na visualização e no PDF. Sem avatar próprio, a ilustração da espécie continua sendo usada.
+
+**Limpar ficha** esvazia a ficha aberta após confirmação. Na tela inicial, **Excluir** remove uma ficha após confirmação. Os dados ficam somente no navegador usado; limpar os dados do navegador também pode removê-los. Uma ficha salva pela versão anterior é importada automaticamente.
 
 ## Arquivos
 

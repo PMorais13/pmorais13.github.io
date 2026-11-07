@@ -21,22 +21,31 @@
     </header>
 
     <main>
-      <section class="hero" aria-labelledby="page-title">
+      <section id="home-view" aria-labelledby="page-title">
+      <div class="hero">
         <div class="eyebrow"><span class="eyebrow-line"></span> ARQUIVO DE PERSONAGEM <span class="eyebrow-line"></span></div>
         <h1 id="page-title">Sua próxima aventura <em>começa aqui.</em></h1>
-        <p>Comece pela espécie: ela define sua vida inicial e suas capacidades próprias. Depois escolha características, armas e ofício.</p>
+        <p>Crie um explorador ou continue uma ficha salva neste navegador.</p>
+        <button id="new-character" class="button button-primary home-create" type="button">+ Criar nova ficha</button>
         <div class="hero-meta"><span><span class="pulse" aria-hidden="true"></span> SALVO NESTE DISPOSITIVO</span><span>✧ TINYD6</span></div>
+      </div>
+      <section class="character-library" aria-labelledby="library-title"><div class="library-heading"><div><p class="section-kicker">SEUS EXPLORADORES</p><h2 id="library-title">Fichas salvas</h2></div><span id="library-count" class="library-count"></span></div><div id="character-list" class="character-list"></div><p id="library-empty" class="library-empty">Nenhuma ficha ainda. Crie a primeira para começar sua aventura.</p></section>
       </section>
 
       <div id="feedback" class="feedback" role="status" aria-live="polite" hidden></div>
 
-      <section id="editor-view" aria-label="Editor da ficha">
+      <section id="editor-view" aria-label="Editor da ficha" hidden>
+        <button id="editor-home" class="back-button editor-home" type="button">← Voltar às fichas</button>
         <div class="section-intro"><div><p id="step-kicker" class="section-kicker">01 — HERANÇA</p><h2 id="step-title">Sua origem e capacidades</h2></div><span id="save-status" class="save-status" aria-live="polite">Pronto para preencher</span></div>
         <div class="step-progress" aria-label="Progresso da ficha"><span id="step-count">Etapa 1 de 6</span><div class="progress-track"><span id="progress-fill"></span></div></div>
         <p class="required-note" hidden><span aria-hidden="true">*</span> Para exportar, escolha herança, características, armas e função, e informe o nome.</p>
         <form id="character-form" novalidate>
           <section class="card" aria-labelledby="identity-title">
             <div class="card-heading"><span class="card-icon" aria-hidden="true">01</span><div><p class="card-kicker">REGISTRO PESSOAL</p><h3 id="identity-title">Identidade</h3></div></div>
+            <div class="avatar-editor">
+              <div class="avatar-frame"><img id="avatar-preview" alt="Prévia do avatar do personagem" hidden><span id="avatar-placeholder" aria-hidden="true">✦</span></div>
+              <div class="avatar-controls field"><label for="avatar-upload">Avatar do personagem</label><input id="avatar-upload" type="file" accept="image/png,image/jpeg,image/webp,image/gif" aria-describedby="avatar-help"><small id="avatar-help">Escolha uma imagem JPG, PNG, WebP ou GIF de até 10 MB. Ela será recortada e salva nesta ficha.</small><button id="avatar-remove" class="avatar-remove" type="button" hidden>Remover avatar</button></div>
+            </div>
             <div class="fields two">
               <div class="field full"><label for="name">Nome do personagem <span class="required">*</span></label><input id="name" name="name" type="text" autocomplete="off" maxlength="100" placeholder="Como chamam você pela galáxia?"><small id="name-error" class="error" hidden>Informe o nome do personagem.</small></div>
               <div class="field"><label for="homeworld">Planeta natal</label><input id="homeworld" name="homeworld" type="text" maxlength="100" placeholder="De onde você veio?"><small><a href="localizacoes.html">Consultar localizações ↗</a></small></div>
@@ -103,9 +112,9 @@
         <div class="actions" id="final-actions" hidden><button id="preview-button" class="button button-primary" type="button">Visualizar ficha <span aria-hidden="true">↗</span></button><button id="export-button" class="button button-secondary" type="button">Exportar PDF <span aria-hidden="true">↓</span></button><button id="clear-button" class="button button-quiet" type="button">Limpar ficha</button></div>
       </section>
 
-      <section id="preview-view" class="preview-view" aria-labelledby="preview-title" hidden><div class="preview-toolbar"><button id="back-button" class="back-button" type="button">← Voltar para edição</button><button id="preview-export-button" class="button button-primary" type="button">Exportar PDF ↓</button></div><div id="preview-content" class="preview-sheet"></div></section>
+      <section id="preview-view" class="preview-view" aria-label="Visualização da ficha" hidden><div class="preview-toolbar"><div><button id="back-button" class="back-button" type="button">← Voltar para edição</button><button id="preview-home" class="back-button" type="button">Ver todas as fichas</button></div><button id="preview-export-button" class="button button-primary" type="button">Exportar PDF ↓</button></div><div id="preview-content" class="preview-sheet"></div></section>
     </main>
-    <footer class="site-footer"><span>✦ EXPLORADORES</span><span>Uma ficha por vez · salva neste navegador</span></footer>
+    <footer class="site-footer"><span>✦ EXPLORADORES</span><span>Fichas salvas neste navegador</span></footer>
   </div>
   <template id="inventory-template"><div class="repeat-row inventory-row"><div class="field item-name-field"><label>Item<input class="item-name" type="text" maxlength="160" placeholder="Ex.: Kit de reparos"></label></div><div class="field"><label>Qtd.<input class="item-quantity" type="number" inputmode="numeric" min="0" step="1" placeholder="—"></label></div><div class="field"><label>Esgotamento<input class="item-depletion" type="number" inputmode="numeric" min="0" max="6" step="1" placeholder="0–6"></label></div><button class="remove-button" type="button" aria-label="Remover item">×</button></div></template>
 </body>

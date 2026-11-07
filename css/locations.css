@@ -4,19 +4,30 @@
   background:#080e1c;
   object-fit:contain
 }
-.locations-dialog .species-modal-body {
-  grid-template-columns:1fr;
-  gap:16px
-}
 .location-modal-image {
-  position:static;
-  width:100%;
-  height:auto;
-  max-height:none;
-  object-fit:contain
+  height:min(430px,calc(90dvh - 56px));
+  border:1px solid #2d3b58
 }
 .locations-dialog .species-modal-details {
-  padding-top:0
+  display:flex;
+  flex-direction:column;
+  height:min(430px,calc(90dvh - 56px))
+}
+.locations-dialog .species-modal-heading {
+  flex:none
+}
+.location-sections {
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding-right:10px;
+  scrollbar-color:#60748f #111c32;
+  scrollbar-width:thin
+}
+.location-sections:focus-visible {
+  outline:2px solid var(--purple);
+  outline-offset:2px
 }
 .location-card-summary {
   display:block;
@@ -27,17 +38,7 @@
   line-height:1.5
 }
 .location-lore-text {
-  max-height:10rem;
-  overflow-y:auto;
-  overscroll-behavior:contain;
-  padding-right:10px;
-  white-space:pre-line;
-  scrollbar-color:#60748f #111c32;
-  scrollbar-width:thin
-}
-.location-lore-text:focus-visible {
-  outline:2px solid var(--purple);
-  outline-offset:3px
+  white-space:pre-line
 }
 .species-lore-section .location-history-empty {
   color:var(--muted);
@@ -45,7 +46,10 @@
 }
 @media(max-width:700px) {
   .location-modal-image {
-    height:auto;
+    height:min(26dvh,210px);
     min-height:0
+  }
+  .locations-dialog .species-modal-details {
+    height:min(45dvh,350px)
   }
 }

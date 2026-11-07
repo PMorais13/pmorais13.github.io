@@ -143,10 +143,13 @@
     title.id = 'species-dialog-title';
     heading.append(node('span','species-origin-label',info.source),title);
     heading.append(node('span','species-hp',`${heritage.hp} PV base`));
-    details.append(heading);
-    addLore(details,'Origem',info.origin);
-    addLore(details,'Aparência',info.appearance);
-    addLore(details,'Costumes e cultura',info.culture);
+    const sections = node('div','species-modal-sections');
+    sections.tabIndex = 0;
+    sections.setAttribute('role','region');
+    sections.setAttribute('aria-label',`Informações sobre ${heritage.name}`);
+    addLore(sections,'Origem',info.origin);
+    addLore(sections,'Aparência',info.appearance);
+    addLore(sections,'Costumes e cultura',info.culture);
     const traits = heritage.choices || heritage.traits || [];
     if (traits.length || heritage.extraTrait) {
       const section = node('section','species-lore-section species-traits');
@@ -157,9 +160,10 @@
         section.append(list);
       }
       if (heritage.extraTrait) section.append(node('p','','Humanos também escolhem uma característica adicional.'));
-      details.append(section);
+      sections.append(section);
     }
-    if (info.page) details.append(node('p','species-page-ref',`Tiny Frontiers: Revised · pág. ${info.page}`));
+    if (info.page) sections.append(node('p','species-page-ref',`Tiny Frontiers: Revised · pág. ${info.page}`));
+    details.append(heading,sections);
     content.append(carousel,details);
     dialogContent.replaceChildren(content);
     dialog.showModal();

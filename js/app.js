@@ -1,7 +1,8 @@
 (() => {
   'use strict';
   const rules = window.TinyFrontiersRules;
-  const STORAGE_KEY = 'tiny-frontiers-character-v2';
+  const STORAGE_KEY = 'tiny-frontiers-characters-v3';
+  const legacyStorageKey = 'tiny-frontiers-character-v2';
   const oldStorageKey = 'tiny-frontiers-character-v1';
   const RULES_RETURN_KEY = 'tiny-frontiers-rules-return';
   const editable = ['name','heritage','heritageChoice','heritageBonus','hiddenWeaponType','homeworld','age','gender','appearance','description','role','roleOther','weaponGroup','masteredWeapon','bonusWeapon','equippedWeapon','armorType','armor','otherEquipment','familyTrade','belief','goal','history','notes'];
@@ -31,6 +32,11 @@
   const saveStatus = document.getElementById('save-status');
   const traitList = document.getElementById('trait-list');
   const inventoryList = document.getElementById('inventory-list');
+  const homeView = document.getElementById('home-view');
+  const editorView = document.getElementById('editor-view');
+  const previewView = document.getElementById('preview-view');
+  const characterList = document.getElementById('character-list');
+  const avatarInput = document.getElementById('avatar-upload');
   const steps = [
     {heading:'heritage-title',title:'Escolha sua espécie',kicker:'01 — ESPÉCIE'},
     {heading:'traits-title',title:'Vida e características',kicker:'02 — CAPACIDADES'},
@@ -42,9 +48,12 @@
   const stepCards = steps.map(step => document.getElementById(step.heading).closest('.card'));
   let currentStep = 0;
   let character = emptyCharacter();
+  let characters = [];
+  let activeId = null;
+  let avatarRequest = 0;
 
   function emptyCharacter() {
-    return {...Object.fromEntries(editable.map(key => [key,''])), traitIds:[], inventory:[]};
+    return {...Object.fromEntries(editable.map(key => [key,''])), avatar:'', traitIds:[], inventory:[]};
   }
   function option(value,label) {
     const node = document.createElement('option');
@@ -70,7 +79,6 @@
     document.getElementById('next-step').hidden = currentStep === steps.length-1;
     document.querySelector('.step-actions').classList.toggle('single',currentStep === 0 || currentStep === steps.length-1);
     document.getElementById('final-actions').hidden = currentStep !== steps.length-1;
-    document.querySelector('.hero').hidden = currentStep !== 0;
   }
   function showFeedback(message,isError=false) {
     feedback.textContent = message;
@@ -78,23 +86,11 @@
     feedback.hidden = false;
     feedback.scrollIntoView({block:'nearest',behavior:'smooth'});
   }
-  function saveCharacter() {
-    try {
-      localStorage.setItem(STORAGE_KEY,JSON.stringify(character));
-      saveStatus.textContent = 'Salvo neste dispositivo ✓';
-    } catch {
-      saveStatus.textContent = 'Erro ao salvar neste dispositivo';
-      showFeedback('Não foi possível salvar automaticamente neste navegador.',true);
-    }
-  }
-  function loadCharacter() {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(oldStorageKey);
-      if (!saved) return;
-      const data = JSON.parse(saved);
-      if (!data || typeof data !== 'object' || Array.isArray(data)) return;
+  function cleanCharacter(data) {
+      if (!data || typeof data !== 'object' || Array.isArray(data)) return emptyCharacter();
       const clean = emptyCharacter();
       editable.forEach(key => { if (typeof data[key] === 'string') clean[key] = data[key]; });
+      if (typeof data.avatar === 'string' && /^data:image\/jpeg;base64,[a-z0-9+/=]+$/i.test(data.avatar) && data.avatar.length < 700000) clean.avatar = data.avatar;
       if (!rules.heritages[clean.heritage]) {
         const match = Object.entries(rules.heritages).find(([,item]) => item.name.toLowerCase() === clean.heritage.toLowerCase());
         clean.heritage = match ? match[0] : '';
@@ -110,9 +106,114 @@
       clean.inventory = Array.isArray(data.inventory) ? data.inventory.filter(item => item && typeof item === 'object').map(item => ({
         name:String(item.name || ''),quantity:String(item.quantity || ''),depletion:String(item.depletion || '')
       })) : [];
-      character = clean;
-      saveStatus.textContent = 'Ficha recuperada';
-    } catch { saveStatus.textContent = 'Não foi possível recuperar a ficha'; }
+      return clean;
+  }
+  function persistLibrary() {
+    try {
+      localStorage.setItem(STORAGE_KEY,JSON.stringify({characters}));
+      saveStatus.textContent = 'Salvo neste dispositivo ✓';
+      return true;
+    } catch {
+      saveStatus.textContent = 'Erro ao salvar neste dispositivo';
+      showFeedback('Não foi possível salvar automaticamente neste navegador.',true);
+      return false;
+    }
+  }
+  function saveCharacter() {
+    const entry = characters.find(item => item.id === activeId);
+    if (!entry) return false;
+    entry.data = character;
+    entry.updatedAt = Date.now();
+    return persistLibrary();
+  }
+  function loadLibrary() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved !== null) {
+        const parsed = JSON.parse(saved);
+        if (!Array.isArray(parsed?.characters)) throw new Error('Arquivo inválido');
+        characters = parsed.characters.filter(item => item && typeof item.id === 'string' && item.data && typeof item.data === 'object').map(item => ({
+          id:item.id,
+          data:cleanCharacter(item.data),
+          updatedAt:Number.isFinite(item.updatedAt) ? item.updatedAt : Date.now()
+        }));
+        return;
+      }
+      const legacy = localStorage.getItem(legacyStorageKey) || localStorage.getItem(oldStorageKey);
+      if (!legacy) return;
+      const data = JSON.parse(legacy);
+      if (!data || typeof data !== 'object' || Array.isArray(data)) return;
+      const clean = cleanCharacter(data);
+      if (!editable.some(key => clean[key]) && !clean.traitIds.some(Boolean) && !clean.inventory.length) return;
+      characters = [{id:makeId(),data:clean,updatedAt:Date.now()}];
+      persistLibrary();
+    } catch {
+      showFeedback('Não foi possível recuperar as fichas salvas neste navegador.',true);
+    }
+  }
+  function makeId() {
+    return window.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  }
+  function renderLibrary() {
+    characterList.replaceChildren();
+    const sorted = [...characters].sort((a,b) => b.updatedAt-a.updatedAt);
+    document.getElementById('library-count').textContent = `${sorted.length} ${sorted.length === 1 ? 'ficha' : 'fichas'}`;
+    document.getElementById('library-empty').hidden = sorted.length > 0;
+    sorted.forEach((entry,index) => {
+      const card = makeElement('article','library-card');
+      const portrait = portraitFor(entry.data);
+      if (portrait) {
+        const image = makeElement('img','library-avatar');
+        image.src = portrait;
+        image.alt = '';
+        card.append(image);
+      }
+      const body = makeElement('div','library-card-body');
+      const title = makeElement('h3','',entry.data.name.trim() || `Explorador sem nome ${index+1}`);
+      const species = rules.heritages[entry.data.heritage]?.name || '';
+      const detail = makeElement('p','', [species,roleLabel(entry.data)].filter(Boolean).join(' · ') || 'Ficha em criação');
+      const date = makeElement('small','',`Atualizada em ${new Date(entry.updatedAt).toLocaleDateString('pt-BR')}`);
+      body.append(title,detail,date);
+      const actions = makeElement('div','library-card-actions');
+      const open = makeElement('button','button button-secondary','Abrir ficha →');
+      open.type = 'button';
+      open.addEventListener('click',() => openCharacter(entry.id));
+      const remove = makeElement('button','library-delete','Excluir');
+      remove.type = 'button';
+      remove.setAttribute('aria-label',`Excluir ficha de ${entry.data.name.trim() || 'explorador sem nome'}`);
+      remove.addEventListener('click',() => deleteCharacter(entry.id));
+      actions.append(open,remove);
+      card.append(body,actions);
+      characterList.append(card);
+    });
+  }
+  function showHome() {
+    homeView.hidden = false;
+    editorView.hidden = true;
+    previewView.hidden = true;
+    feedback.hidden = true;
+    renderLibrary();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function openCharacter(id,step=0) {
+    const entry = characters.find(item => item.id === id);
+    if (!entry) return;
+    avatarRequest++;
+    activeId = id;
+    character = cleanCharacter(entry.data);
+    renderForm();
+    showStep(step);
+    showEditor();
+    feedback.hidden = true;
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function deleteCharacter(id) {
+    const entry = characters.find(item => item.id === id);
+    if (!entry || !window.confirm(`Excluir a ficha de ${entry.data.name.trim() || 'explorador sem nome'}? Esta ação não pode ser desfeita.`)) return;
+    characters = characters.filter(item => item.id !== id);
+    if (activeId === id) activeId = null;
+    persistLibrary();
+    renderLibrary();
   }
   function createInventoryRow(item={}) {
     const row = document.getElementById('inventory-template').content.firstElementChild.cloneNode(true);
@@ -202,6 +303,7 @@
     const detailImage = document.getElementById('heritage-detail-image');
     detailImage.src = heritage ? `assets/heritages/${character.heritage}.png` : '';
     detailImage.alt = heritage ? `Ilustração da espécie ${heritage.name}` : '';
+    renderAvatar();
     const choiceField = document.getElementById('heritage-choice-field');
     choiceField.hidden = !heritage?.choices;
     if (heritage?.choices) {
@@ -347,6 +449,7 @@
     input.value = Number.isFinite(value) ? String(Math.max(0,Math.min(input.max ? Number(input.max) : Infinity,Math.floor(value)))) : '';
   }
   function handleInput(event) {
+    if (event.target === avatarInput) return;
     if (event.type === 'change' && event.target.matches('input[type="number"]')) normalizeNumber(event.target);
     readForm();
     if (event.type === 'change' && event.target.matches('select')) renderRules();
@@ -360,6 +463,69 @@
     saveCharacter();
   }
   function roleLabel(data) { return data.role === 'other' ? data.roleOther.trim() : data.role; }
+  function portraitFor(data) {
+    return data.avatar || (rules.heritages[data.heritage] ? `assets/heritages/${data.heritage}.png` : '');
+  }
+  function renderAvatar() {
+    const image = document.getElementById('avatar-preview');
+    const portrait = portraitFor(character);
+    image.hidden = !portrait;
+    image.src = portrait;
+    document.getElementById('avatar-placeholder').hidden = !!portrait;
+    document.getElementById('avatar-remove').hidden = !character.avatar;
+    avatarInput.value = '';
+  }
+  async function uploadAvatar(file) {
+    if (!file) return;
+    const selectedId = activeId;
+    const request = ++avatarRequest;
+    if (!['image/jpeg','image/png','image/webp','image/gif'].includes(file.type) || file.size > 10 * 1024 * 1024) {
+      showFeedback('Escolha uma imagem JPG, PNG, WebP ou GIF de até 10 MB.',true);
+      avatarInput.value = '';
+      return;
+    }
+    const url = URL.createObjectURL(file);
+    try {
+      const image = new Image();
+      image.src = url;
+      await image.decode();
+      if (activeId !== selectedId || avatarRequest !== request) return;
+      const canvas = document.createElement('canvas');
+      canvas.width = 480;
+      canvas.height = 600;
+      const context = canvas.getContext('2d');
+      if (!context || !image.naturalWidth || !image.naturalHeight) throw new Error('Imagem inválida');
+      const size = Math.min(image.naturalWidth / 4, image.naturalHeight / 5);
+      context.fillStyle = '#e1dccd';
+      context.fillRect(0,0,480,600);
+      context.drawImage(image,(image.naturalWidth-size*4)/2,(image.naturalHeight-size*5)/2,size*4,size*5,0,0,480,600);
+      let avatar = canvas.toDataURL('image/jpeg',0.78);
+      if (avatar.length > 500000) {
+        const smaller = document.createElement('canvas');
+        smaller.width = 320;
+        smaller.height = 400;
+        smaller.getContext('2d').drawImage(canvas,0,0,320,400);
+        avatar = smaller.toDataURL('image/jpeg',0.7);
+      }
+      const previous = character.avatar;
+      const entry = characters.find(item => item.id === selectedId);
+      const previousUpdatedAt = entry?.updatedAt;
+      character.avatar = avatar;
+      if (!saveCharacter()) {
+        character.avatar = previous;
+        if (entry) entry.updatedAt = previousUpdatedAt;
+        return;
+      }
+      renderAvatar();
+      feedback.hidden = true;
+    } catch (error) {
+      console.error('Falha ao carregar avatar:',error);
+      showFeedback('Não foi possível usar essa imagem. Escolha outro arquivo.',true);
+    } finally {
+      URL.revokeObjectURL(url);
+      avatarInput.value = '';
+    }
+  }
   function makeElement(tag,className,value) {
     const element = document.createElement(tag);
     if (className) element.className = className;
@@ -391,6 +557,13 @@
     const root = document.getElementById('preview-content');
     root.replaceChildren();
     root.append(makeElement('div','preview-topline','✦ EXPLORADORES / REGISTRO DE PERSONAGEM'));
+    const portrait = portraitFor(character);
+    if (portrait) {
+      const image = makeElement('img','preview-avatar');
+      image.src = portrait;
+      image.alt = `Avatar de ${character.name.trim() || 'explorador sem nome'}`;
+      root.append(image);
+    }
     root.append(makeElement('h2','',character.name.trim() || 'Explorador sem nome'));
     const subtitle = [character.heritageName,roleLabel(character)].filter(Boolean).join(' · ');
     if (subtitle) root.append(makeElement('p','preview-subtitle',subtitle));
@@ -433,13 +606,14 @@
     return true;
   }
   function showEditor() {
-    document.getElementById('preview-view').hidden = true;
-    document.getElementById('editor-view').hidden = false;
+    homeView.hidden = true;
+    previewView.hidden = true;
+    editorView.hidden = false;
   }
   function exportCharacter() {
     if (!validateExport()) return;
     try {
-      const portraitData = window.TinyFrontiersPortraits?.[character.heritage] || '';
+      const portraitData = character.avatar || window.TinyFrontiersPortraits?.[character.heritage] || '';
       window.generateCharacterPdf({...character,heritage:character.heritageName,portrait:portraitData},roleLabel(character));
       showFeedback('PDF gerado. Verifique os downloads do seu navegador.');
     } catch(error) {
@@ -481,6 +655,16 @@
   });
   form.addEventListener('input',handleInput);
   form.addEventListener('change',handleInput);
+  avatarInput.addEventListener('change',event => uploadAvatar(event.target.files?.[0]));
+  document.getElementById('avatar-remove').addEventListener('click',() => {
+    const previous = character.avatar;
+    if (!previous) return;
+    avatarRequest++;
+    character.avatar = '';
+    if (!saveCharacter()) { character.avatar = previous; return; }
+    renderAvatar();
+    feedback.hidden = true;
+  });
   document.getElementById('add-item').addEventListener('click',()=>{
     createInventoryRow();
     readForm();
@@ -500,9 +684,16 @@
     renderPreview();
     document.getElementById('editor-view').hidden = true;
     document.getElementById('preview-view').hidden = false;
-    document.querySelector('.hero').hidden = true;
     window.scrollTo({top:0,behavior:'smooth'});
   });
+  document.getElementById('new-character').addEventListener('click',()=>{
+    const id = makeId();
+    characters.push({id,data:emptyCharacter(),updatedAt:Date.now()});
+    persistLibrary();
+    openCharacter(id);
+  });
+  document.getElementById('editor-home').addEventListener('click',showHome);
+  document.getElementById('preview-home').addEventListener('click',showHome);
   document.getElementById('back-button').addEventListener('click',()=>{showEditor();showStep(currentStep);window.scrollTo({top:0,behavior:'smooth'});});
   document.getElementById('previous-step').addEventListener('click',()=>{showStep(currentStep-1);feedback.hidden=true;document.getElementById('step-title').scrollIntoView({block:'start',behavior:'smooth'});});
   document.getElementById('back-to-heritage').addEventListener('click',()=>{showStep(0);feedback.hidden=true;window.scrollTo({top:0,behavior:'smooth'});});
@@ -512,13 +703,15 @@
   document.querySelectorAll('.header-actions .rules-link').forEach(link=>link.addEventListener('click',()=>{
     try {
       sessionStorage.setItem(RULES_RETURN_KEY,JSON.stringify({
+        id:activeId,
         step:currentStep,
-        preview:!document.getElementById('preview-view').hidden
+        preview:!previewView.hidden
       }));
     } catch {}
   }));
   document.getElementById('clear-button').addEventListener('click',()=>{
     if (!window.confirm('Limpar todos os dados desta ficha? Esta ação não pode ser desfeita.')) return;
+    avatarRequest++;
     character = emptyCharacter();
     renderForm();
     showStep(0);
@@ -526,18 +719,20 @@
     feedback.hidden = true;
     showFeedback('Ficha limpa. Você pode começar um novo personagem.');
   });
-  loadCharacter();
-  renderForm();
+  showHome();
+  loadLibrary();
+  renderLibrary();
   let returnState;
   try {
     returnState = JSON.parse(sessionStorage.getItem(RULES_RETURN_KEY) || 'null');
     sessionStorage.removeItem(RULES_RETURN_KEY);
   } catch {}
-  showStep(Number.isInteger(returnState?.step) ? returnState.step : 0);
-  if (returnState?.preview) {
+  if (returnState?.id && characters.some(item => item.id === returnState.id)) {
+    openCharacter(returnState.id,Number.isInteger(returnState.step) ? returnState.step : 0);
+  }
+  if (returnState?.preview && activeId) {
     renderPreview();
-    document.getElementById('editor-view').hidden = true;
-    document.getElementById('preview-view').hidden = false;
-    document.querySelector('.hero').hidden = true;
+    editorView.hidden = true;
+    previewView.hidden = false;
   }
 })();

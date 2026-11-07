@@ -15,7 +15,7 @@
       summary: 'Porto de passagem entre a Terra e o restante do Sistema Solar.',
       environment: 'O lado voltado para a Terra reúne terminais, docas e habitats sob a superfície. Fora das rotas iluminadas, o terreno continua silencioso, coberto de poeira fina e marcado por crateras antigas.',
       life: 'Tripulações, técnicos, viajantes e comerciantes se cruzam por pouco tempo. Quem mora aqui aprende a reconhecer uma nave pelo som de seus sistemas e a tratar ar, água e espaço como recursos compartilhados.',
-      history: ''
+      history: 'O lado voltado para a Terra reúne terminais, docas e habitats sob a superfície. Fora das rotas iluminadas, o terreno continua silencioso, coberto de poeira fina e marcado por crateras antigas.O lado voltado para a Terra reúne terminais, docas e habitats sob a superfície. Fora das rotas iluminadas, o terreno continua silencioso, coberto de poeira fina e marcado por crateras antigas.O lado voltado para a Terra reúne terminais, docas e habitats sob a superfície. Fora das rotas iluminadas, o terreno continua silencioso, coberto de poeira fina e marcado por crateras antigas.'
     },
     {
       id: 'mars', name: 'Marte', type: 'Planeta', region: 'Sistema Solar',
@@ -82,22 +82,25 @@
 
   function openDetails(location) {
     const content = node('div', 'species-modal-body');
+    const imageColumn = node('div', 'species-carousel');
+    imageColumn.append(artwork(location, true));
     const details = node('div', 'species-modal-details');
     const heading = node('div', 'species-modal-heading');
     const title = node('h2', '', location.name);
     title.id = 'locations-dialog-title';
     heading.append(node('span', 'species-origin-label', `${location.type} · ${location.region}`), title, node('span', 'species-hp', 'ANO 2613'));
-    details.append(heading);
-    addSection(details, 'Panorama', location.summary);
-    addSection(details, 'Ambiente', location.environment);
-    addSection(details, 'Vida local', location.life);
-    addSection(details, 'História', location.history || 'História ainda não registrada.', !location.history);
-    content.append(artwork(location, true), details);
+    const sections = node('div', 'location-sections');
+    sections.tabIndex = 0;
+    sections.setAttribute('role', 'region');
+    sections.setAttribute('aria-label', `Informações sobre ${location.name}`);
+    addSection(sections, 'Panorama', location.summary);
+    addSection(sections, 'Ambiente', location.environment);
+    addSection(sections, 'Vida local', location.life);
+    addSection(sections, 'História', location.history || 'História ainda não registrada.', !location.history);
+    details.append(heading, sections);
+    content.append(imageColumn, details);
     dialogContent.replaceChildren(content);
     dialog.showModal();
-    details.querySelectorAll('.location-lore-text').forEach(text => {
-      if (text.scrollHeight > text.clientHeight) text.tabIndex = 0;
-    });
   }
 
   function makeCard(location) {

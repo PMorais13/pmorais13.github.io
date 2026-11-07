@@ -282,11 +282,15 @@
   outline-offset:3px
 }
 .species-modal-details {
+  display:flex;
+  flex-direction:column;
+  height:min(430px,calc(90dvh - 56px));
   min-width:0;
   padding:14px 0 4px
 }
 .species-modal-heading {
   display:grid;
+  flex:none;
   grid-template-columns:minmax(0,1fr) auto;
   align-items:end;
   gap:8px 14px;
@@ -305,6 +309,19 @@
 .species-modal-heading .species-hp {
   white-space:nowrap
 }
+.species-modal-sections {
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding-right:10px;
+  scrollbar-color:#60748f #111c32;
+  scrollbar-width:thin
+}
+.species-modal-sections:focus-visible {
+  outline:2px solid var(--purple);
+  outline-offset:2px
+}
 @media(max-width:700px) {
   .species-modal-body {
     grid-template-columns:1fr;
@@ -322,6 +339,7 @@
     min-height:190px
   }
   .species-modal-details {
+    height:min(45dvh,350px);
     padding-top:0
   }
 }
